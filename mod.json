@@ -1,0 +1,38 @@
+{
+	"caption": {
+		"Cn_Simp": "英雄升级送宝（重制版）V1.3",
+		"en_US": "Hero LevelUp Artifact Bonus (Full Remake) V1.3",
+		"ru_RU": "Награда Артефактом При Повышении Уровня Героя (Полный Ремик)",
+		"ua_UA": "Нагорода Артефактом При Піднятті Рівня Героя (Повний Ремейк)"
+	},
+	"description": {
+		"full": {
+			"Cn_Simp": "README_CN.md",
+			"en_US": "README.md",
+			"ru_RU": "",
+			"ua_UA": ""
+		},
+		"short": {
+			"Cn_Simp": "英雄升级送宝（重制版）V1.3",
+			"en_US": "Hero LevelUp Artifact Bonus (Full Remake) V1.3",
+			"ru_RU": "Награда Артефактом При Повышении Уровня (Полный Ремик)",
+			"ua_UA": "Нагорода Артефактом При Піднятті Рівня (Повний Ремейк)"
+		}
+	},
+	"author": "MoonHeart",
+	"homepage": "",
+	"icon": {
+		"file": "",
+		"index": 0
+	},
+	"mod_version": "1.3",
+	"priority": 0,
+	"compatibility": {
+		"class": "default",
+		"entries": {}
+	},
+	"platform": "era",
+	"info_version": "1.0",
+	"plugins": {},
+	"category": "gameplay"
+}
