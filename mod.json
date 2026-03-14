@@ -1,7 +1,7 @@
 {
 	"caption": {
-		"Cn_Simp": "英雄升级送宝（重制版）V1.3",
-		"en_US": "Hero LevelUp Artifact Bonus (Full Remake) V1.3",
+		"Cn_Simp": "英雄升级送宝（重制版）V1.4",
+		"en_US": "Hero LevelUp Artifact Bonus (Full Remake) V1.4",
 		"ru_RU": "Награда Артефактом При Повышении Уровня Героя (Полный Ремик)",
 		"ua_UA": "Нагорода Артефактом При Піднятті Рівня Героя (Повний Ремейк)"
 	},
@@ -13,8 +13,8 @@
 			"ua_UA": ""
 		},
 		"short": {
-			"Cn_Simp": "英雄升级送宝（重制版）V1.3",
-			"en_US": "Hero LevelUp Artifact Bonus (Full Remake) V1.3",
+			"Cn_Simp": "英雄升级送宝（重制版）V1.4",
+			"en_US": "Hero LevelUp Artifact Bonus (Full Remake) V1.4",
 			"ru_RU": "Награда Артефактом При Повышении Уровня (Полный Ремик)",
 			"ua_UA": "Нагорода Артефактом При Піднятті Рівня (Повний Ремейк)"
 		}
@@ -25,7 +25,7 @@
 		"file": "",
 		"index": 0
 	},
-	"mod_version": "1.3",
+	"mod_version": "1.4",
 	"priority": 0,
 	"compatibility": {
 		"class": "default",

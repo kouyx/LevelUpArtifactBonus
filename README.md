@@ -5,6 +5,10 @@ Author: MoonHeart
 
 ## Changelog
 
+### v1.4 (2026-03-14)
+- Replaced the artifact RNG implementation with a time-based generator; reloading a save may produce different outcomes.
+- Switched to built-in i18n text and removed hardcoded popup strings; script files are now saved in UTF-8.
+
 ### v1.3 (2026-01-02)
 - Pools are now divided by hero level instead of experience, improving selection during consecutive level-ups: previously only the final level's pool was used; now each level-up draws from the pool matching the level gained.
 - Heroes that start the game at a high level (map presets, tavern recruits, etc.) no longer trigger the level-up artifact reward. Only heroes who gain levels through normal in-game experience after the game start can trigger the mechanism.
