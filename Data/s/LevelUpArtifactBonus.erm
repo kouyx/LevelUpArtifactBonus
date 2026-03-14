@@ -24,6 +24,7 @@ ZVSE2
 
 !?FU(OnGameEnter);
 !!VRi^lv_isGameStarted^:S(TRUE);
+!!VRi^lv_maxArtifactNumber^:S289;
 
 ; ===================================== 核心宝物池函数（重制优化：白名单准入+检查已有）=====================================
 ; 奖池规则说明：
@@ -34,7 +35,7 @@ ZVSE2
 
 !?FU(basic_lv_up_bonus); [奖池(basic_lv_up_bonus)：白名单准入（新手期基础宝物）]
 !!re i/0/99;
-  !!VRx1:S7 R289; [初始随机宝物编号：7-289]
+  !!VRx1:S7 Ti^lv_maxArtifactNumber^; [初始随机宝物编号：7-289]
   !!HE-1:A2/x1/?(has:y)/?(equipped:y); [检查英雄是否已拥有该宝物]
   !!if&(has)=0/(equipped)=0/x1>=7/x1<=7:; 人马战斧（普通宝物-右手）
     !!br;  [英雄未拥有，跳出循环]
@@ -99,7 +100,7 @@ ZVSE2
 
 !?FU(advanced_lv_up_bonus); [奖池(advanced_lv_up_bonus)：白名单准入（过渡期低-中阶宝物）]
 !!re i/0/99;
-  !!VRx1:S7 R289; [初始随机宝物编号：7-289]
+  !!VRx1:S7 Ti^lv_maxArtifactNumber^; [初始随机宝物编号：7-289]
   !!HE-1:A2/x1/?(has:y)/?(equipped:y); [检查英雄是否已拥有该宝物]
   !!if&(has)=0/(equipped)=0/x1>=7/x1<=8:; 人马战斧（普通宝物-右手）、黑魔剑（普通宝物-右手）
     !!br;
@@ -198,7 +199,7 @@ ZVSE2
 
 !?FU(expert_lv_up_bonus); [奖池(expert_lv_up_bonus)：白名单准入（发育期中级宝物）]
 !!re i/0/99;
-  !!VRx1:S7 R289; [初始随机宝物编号：7-289]
+  !!VRx1:S7 Ti^lv_maxArtifactNumber^; [初始随机宝物编号：7-289]
   !!HE-1:A2/x1/?(has:y)/?(equipped:y); [检查英雄是否已拥有该宝物]
   !!if&(has)=0/(equipped)=0/x1>=7/x1<=9:; 人马战斧（普通宝物-右手）、黑魔剑（普通宝物-右手）、狼人连枷（普通宝物-右手）
     !!br;  [在白名单中，跳出循环]
@@ -293,7 +294,7 @@ ZVSE2
 
 !?FU(master_lv_up_bonus); [奖池(master_lv_up_bonus)：白名单准入（成型期高-中阶宝物）]
 !!re i/0/99;
-  !!VRx1:S7 R289; [初始随机宝物编号：7-289]
+  !!VRx1:S7 Ti^lv_maxArtifactNumber^; [初始随机宝物编号：7-289]
   !!HE-1:A2/x1/?(has:y)/?(equipped:y); [检查英雄是否已拥有该宝物]
   !!if&(has)=0/(equipped)=0/x1>=7/x1<=7:; 人马战斧（普通宝物-右手）
     !!br;  [在白名单中，跳出循环]
@@ -388,7 +389,7 @@ ZVSE2
 
 !?FU(grand_master_lv_up_bonus); [奖池(grand_master_lv_up_bonus)：白名单准入（终局期高阶宝物）]
 !!re i/0/99;
-  !!VRx1:S7 R289; [初始随机宝物编号：7-289]
+  !!VRx1:S7 Ti^lv_maxArtifactNumber^; [初始随机宝物编号：7-289]
   !!HE-1:A2/x1/?(has:y)/?(equipped:y); [检查英雄是否已拥有该宝物]
   !!if&(has)=0/(equipped)=0/x1>=10/x1<=11:; 恶魔之棒（普通宝物-右手）、火神剑（普通宝物-右手）
     !!br;  [在白名单中，跳出循环]
@@ -478,31 +479,29 @@ ZVSE2
 !!en;
 
 ; ===================================== 升级触发逻辑（重制优化：精准经验分段+全流程注释）=====================================
-!?FU(OnAfterHeroGainLevel)&i^wog_101_map_rule_15_isEnabled^=(FALSE);
-  !!if&i^lv_isGameStarted^;
-    !!HE-1:E?(exp:y)/?(level:y); ;读取英雄经验值、等级
-    ; 经验分段匹配奖池（适配新等级梯度：1-9/10-19/20-28/29-39/40+）
-    !!if&(level)<10; [Lv1-9 → FU(basic_lv_up_bonus)]
-      !!FU(basic_lv_up_bonus):P?y3;
-    !!en;
-    !!if&(level)>=10/(level)<20; [Lv10-19 → FU(advanced_lv_up_bonus)]
-      !!FU(advanced_lv_up_bonus):P?y3;
-    !!en;
-    !!if&(level)>=20/(level)<29; [Lv20-28 → FU(expert_lv_up_bonus)]
-      !!FU(expert_lv_up_bonus):P?y3;
-    !!en;
-    !!if&(level)>=29/(level)<40; [Lv29-39 → FU(master_lv_up_bonus)]
-      !!FU(master_lv_up_bonus):P?y3;
-    !!en;
-    !!if&(level)>=40; [Lv40+ → FU(grand_master_lv_up_bonus)]
-      !!FU(grand_master_lv_up_bonus):P?y3;
-    !!en;
-    !!if&y3>=7; [有效宝物才赠送]
-      !!HE-1:A4/y3; ; 装备宝物
-      !!HE-1:B0/?z2; ; 读取英雄名称
-      !!HE-1:O?y4; ; 读取所属玩家
-      !!OW&y4<>-1:Iy4/?y5; ; 判断AI/人类
-      !!IF&y4<>-1/y5=0:Q2/8/y3/1/z999; ; 人类玩家弹窗提示
-    !!en;
+!?FU(OnAfterHeroGainLevel)&i^lv_isGameStarted^/i^wog_101_map_rule_15_isEnabled^=(FALSE);
+  !!HE-1:E?(exp:y)/?(level:y); ;读取英雄经验值、等级
+  ; 经验分段匹配奖池（适配新等级梯度：1-9/10-19/20-28/29-39/40+）
+  !!if&(level)<10; [Lv1-9 → FU(basic_lv_up_bonus)]
+    !!FU(basic_lv_up_bonus):P?y3;
+  !!en;
+  !!if&(level)>=10/(level)<20; [Lv10-19 → FU(advanced_lv_up_bonus)]
+    !!FU(advanced_lv_up_bonus):P?y3;
+  !!en;
+  !!if&(level)>=20/(level)<29; [Lv20-28 → FU(expert_lv_up_bonus)]
+    !!FU(expert_lv_up_bonus):P?y3;
+  !!en;
+  !!if&(level)>=29/(level)<40; [Lv29-39 → FU(master_lv_up_bonus)]
+    !!FU(master_lv_up_bonus):P?y3;
+  !!en;
+  !!if&(level)>=40; [Lv40+ → FU(grand_master_lv_up_bonus)]
+    !!FU(grand_master_lv_up_bonus):P?y3;
+  !!en;
+  !!if&y3>=7; [有效宝物才赠送]
+    !!HE-1:A4/y3; ; 装备宝物
+    !!HE-1:B0/?z2; ; 读取英雄名称
+    !!HE-1:O?y4; ; 读取所属玩家
+    !!OW&y4<>-1:Iy4/?y5; ; 判断AI/人类
+    !!IF&y4<>-1/y5=0:Q2/8/y3/1/z999; ; 人类玩家弹窗提示
   !!en;
 ; 升级触发器结束
